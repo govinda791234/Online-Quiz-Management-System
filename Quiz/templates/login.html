@@ -1,0 +1,49 @@
+
+	{% extends 'master.html' %}
+	{% block content %}
+	<style type="text/css">
+		body
+		{
+			background-color: steelblue;
+		}
+	</style>
+	<form action="{% url 'login' %}" method="POST">
+		{% csrf_token %}
+
+		{% for message in messages %}
+	<div class="alert alert-{{messgae.tags}} alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-lable="close">
+			<span area-hidden="true">&times;</span>
+		</button>
+	{{ message }}
+	</div> 
+	{% endfor %}
+
+	
+
+	<div class="container" style="text-align: center; margin-top:40px; width: 500px;height: 300px; border-radius: 8px;">
+		<h1 class="design">Account Login</h1><br>
+		
+		<div class="form" style="text-align: center;">
+			
+			<div class="col-lg-12">
+				<div class="form-group">
+					<input type="text" placeholder="UserName"name="User_Name"class="form-control">
+				</div></div>
+			<div class="col-lg-12">
+				<div class="form-group">
+					<input type="password" placeholder="Password"name="Password"class="form-control">
+				</div></div>
+
+	
+				<input type="submit"class="btn btn-success" value="Login Now" name="" style="width:90%;height: 40px; margin-top: 8px">
+				<br>
+				<p>Create a new account <a href="{% url 'register' %}">Register</a></p>
+				
+		</div>
+
+	</div>
+</form>
+
+	{% endblock %}
+

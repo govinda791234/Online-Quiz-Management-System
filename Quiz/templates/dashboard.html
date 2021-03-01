@@ -1,0 +1,16 @@
+
+{% include 'menu.html' %}
+
+
+{% block content %}
+<div class="img-thumbnail">
+	
+	<h1>Total User:{{total_user}}</h1>
+	<h1>Total Question:{{total_question}}</h1>
+
+</div>
+
+{{ user.is_superuser }}
+{% endblock %}
+
+

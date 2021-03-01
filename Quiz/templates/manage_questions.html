@@ -1,0 +1,46 @@
+{% include 'menu.html' %}
+{% block content %}
+
+{% for message in messages %}
+	<div class="alert alert-{{messgae.tags}} alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-lable="close">
+			<span area-hidden="true">&times;</span>
+		</button>
+	{{ message }}
+	</div> 
+	{% endfor %}
+
+	<a href="{% url 'add_question' %}" class="btn btn-success">Add Question</a>
+<table class="table table bordered">
+	<thead>
+	<tr>
+		<th>S.No</th>
+		<th>Question</th>
+		<th>Choice1</th>
+		<th>Choice2</th>
+		<th>Choice3</th>
+		<th>Choice4</th>
+		<th>Right Answer</th>
+		<th>Action</th>
+	</tr>
+</thead>
+<tbody>
+	{% for user_data in users  %}
+	<tr>
+		<td>{{ forloop.counter }}</td>
+		<td>{{ user_data.questions }}</td>
+		<td>{{ user_data.choice1 }}</td>
+		<td>{{ user_data.choice2 }}</td>
+		<td>{{ user_data.choice3 }}</td>
+		<td>{{ user_data.choice4 }}</td>
+		<td>{{ user_data.currect_answer }}</td>
+		<td>
+			<a href="{% url 'delete_question' user_data.pk %}" class="btn-sm btn btn-danger">Delete</a>
+			<a href="{% url 'Edit_questions' user_data.pk %}" class="btn-sm btn btn-success">Edit</a>
+		</td>
+	</tr>
+	{% endfor %}
+</tbody>
+</table>
+
+{% endblock %}

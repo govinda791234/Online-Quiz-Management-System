@@ -1,0 +1,68 @@
+{% include 'menu.html' %}
+{% block content %}
+
+<form action="{% url 'Update' %}" method="post">
+	{% for question in qust %}
+	{% csrf_token %}
+
+	{% for message in messages %}
+	<div class="alert alert-{{messgae.tags}} alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-lable="close">
+			<span area-hidden="true">&times;</span>
+		</button>
+	{{ message }}
+	</div> 
+	{% endfor %}
+
+	
+	<table class="table">
+		<tr>
+			<th>Update Question</th>
+		</tr>
+		<tr>
+			<td>Question:</td>
+			<td><textarea name="questions">{{ question.questions }}</textarea></td>
+		</tr>
+		<tr>
+			<td>Option1:</td>
+			<td><textarea name="choice1">{{ question.choice1 }}</textarea></td>
+
+			<td>Option2:</td>
+			<td><textarea name="choice2">{{ question.choice2 }}</textarea></td>
+		
+		</tr>
+		<tr>
+			<td>Option3:</td>
+			<td><textarea name="choice3">{{ question.choice3 }}</textarea></td>
+
+			<td>Option4:</td>
+			<td><textarea name="choice4">{{ question.choice4 }}</textarea></td>
+		
+		</tr>
+		<tr>
+			<td>
+				Right Answer:
+			</td>
+			<td>
+				<select name="currect_answer">
+					<option>Select Option</option>
+					<option {% if question.currect_answer == '1' %} selected="" {% endif %} value="1">Option1</option>
+					<option {% if question.currect_answer == '2' %} selected="" {% endif %} value="2">Option2</option>
+					<option {% if question.currect_answer == '3' %} selected="" {% endif %} value="3">Option3</option>
+					<option {% if question.currect_answer == '4' %} selected="" {% endif %} value="4">Option4</option>
+				</select>
+			</td>
+		</tr>
+		<input type="hidden" value="{{ question.id }}" name="question_id">
+		<tr>
+		
+			<td><button class="btn btn-info" type="submit">Update Question</button></td>
+		</tr>
+
+	</table>
+
+	{% endfor %}
+	
+</form>
+
+{% endblock %}

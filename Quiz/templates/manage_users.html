@@ -1,0 +1,49 @@
+
+{% include 'menu.html' %}
+{% block content %}
+
+{% for message in messages %}
+	<div class="alert alert-{{messgae.tags}} alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-lable="close">
+			<span area-hidden="true">&times;</span>
+		</button>
+	{{ message }}
+	</div> 
+	{% endfor %}
+<table class="table table bordered  table-striped">
+	<thead>
+	<tr>
+		<th>S.No</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Username</th>
+		<th>Email</th>
+		<th>User Type</th>
+		<th>Action</th>
+	</tr>
+</thead>
+<tbody>
+	{% for user_data in users %}
+	<tr>
+		<td>{{ forloop.counter }}</td>
+		<td>{{ user_data.first_name }}</td>
+		<td>{{ user_data.last_name }}</td>
+		<td>{{ user_data.username }}</td>
+		<td>{{ user_data.email }}</td>
+		<td>
+			{% if user_data.is_superuser %}
+			<label class="label label-danger">Admin</label>
+			{% else %}
+			<label class="label label-success">User</label>
+			{% endif %}
+
+	</td>
+		<td>
+			<a href="{% url 'delete_user' user_data.pk %}"><label class="label label-danger">Delete</label></a>
+			<a href="{% url 'edit_user' user_data.pk %}"><label class="label label-success">Edit</label></a>
+		</td>
+	</tr>
+	{% endfor %}
+</tbody>
+</table>
+{% endblock %}
